@@ -1,2 +1,2 @@
 # Wulf - Discord Bot
-A fairly open-source discord bot.
+### A fairly open-source discord bot.
