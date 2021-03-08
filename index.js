@@ -1,24 +1,13 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token, errorColor } = require('./config.json');
-
-/* 
-
-config.json stores the bot's token, prefix, and an error color. If you do not have config.json
-you will want to create it and put in the following code. If you do have the file, you may need
-to add a few things.
-
-CODE TO ADD:
-{
-    "prefix": "PREFIX_OF_CHOICE",
-    "token": "56_CHAR_TOKEN",
-    "error_color": "#d92d43"
-} 
-
-*/
+const { prefix, token } = require('./config.json'); // A config.json file will have to be created with "Prefix" & "Token"
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+
+/* './commands' is to split all the commands into individual files
+to prevent an obnoxiously long 'if..else if' chain. Creating another 
+command, a new .js file will need to be created in './commands' */
 
 const commandfiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -27,7 +16,7 @@ for (const file of commandfiles) {
     client.commands.set(command.name, command);
 }
 
-// Message Overwatch
+// Listen for messages.
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -42,11 +31,11 @@ client.on('message', message => {
         }
 });
 
-// Activation & Activity
+// Activation & Activity -- Console logs a "login message"
 client.once('ready', () => {
     console.log('> Logged in successfully as ' + client.user.tag + '. <\n');
     client.user.setActivity(`the distant howls.`, { type: 'LISTENING'})
 });
 
-// Login, token = ./config.json
+// Login with token, located in ./config.json.
 client.login(token);
