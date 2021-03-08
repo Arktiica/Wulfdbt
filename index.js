@@ -1,12 +1,21 @@
-/*
-        GENERAL INFORMATION
-    ---------------------------
-    Discord Bot:           Wulf
-    Developer:        ArktisRäv
-*/
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token, botColor } = require('./config.json');
+const { prefix, token, errorColor } = require('./config.json');
+
+/* 
+
+config.json stores the bot's token, prefix, and an error color. If you do not have config.json
+you will want to create it and put in the following code. If you do have the file, you may need
+to add a few things.
+
+CODE TO ADD:
+{
+    "prefix": "PREFIX_OF_CHOICE",
+    "token": "56_CHAR_TOKEN",
+    "error_color": "#d92d43"
+} 
+
+*/
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -27,7 +36,7 @@ client.on('message', message => {
     // Dynamic Command Execution, allowing ./commands to be each and every command.
     if (!client.commands.has(command)) return;
         try {
-            client.commands.get(command).execute(message, client, args, prefix, botColor);
+            client.commands.get(command).execute(message, client, args, prefix, errorColor);
         } catch (error) {
             console.error('\n' + error + '\n')
         }
