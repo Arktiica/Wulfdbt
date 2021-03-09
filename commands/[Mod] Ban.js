@@ -1,3 +1,5 @@
+// NOT FINISHED BY ANY MEANS
+
 module.exports = {
     name: "ban",
     description: "Bans a user from the server.",
