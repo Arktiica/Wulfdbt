@@ -1,2 +1,7 @@
 # Wulf - Discord Bot
-### A fairly open-source discord bot.
+###### Open source discord bot.
+
+### Current Commands
+* Guild Info
+* User Info
+* Banning Users
