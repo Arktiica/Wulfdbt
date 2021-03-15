@@ -31,10 +31,17 @@ client.on('message', message => {
         }
 });
 
-// Activation & Activity -- Console logs a "login message"
+/* Logs the bot login if it successfully logs in. Also sets status, so
+feel free to change out the setActivity:
+    'Status', {type: 'Type'}
+Type is limited to:
+    - Streaming
+    - Listening
+    - Watching
+    - Playing               */
 client.once('ready', () => {
     console.log('> Logged in successfully as ' + client.user.tag + '. <\n');
-    client.user.setActivity(`the distant howls.`, { type: 'LISTENING'})
+    client.user.setActivity(`to the distant howls`, { type: 'LISTENING'})
 });
 
 // Login with token, located in ./config.json.
