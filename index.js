@@ -46,3 +46,13 @@ client.once('ready', () => {
 
 // Login with token, located in ./config.json.
 client.login(token);
+
+
+
+/* Don't forget that you need a config.json with the Prefix & Token. You'll may also need
+to get the node_modules. Additional information for what you may need, how to get these,
+or documentation for discord.js & JavaScript can be found in the following: 
+    https://discordjs.guide/#before-you-begin
+    https://discord.js.org/#/
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript
+*/
