@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json'); // A config.json file will have to be created with "Prefix" & "Token"
+const { prefix, token, errorColor } = require('./config.json'); // A config.json file will have to be created with "Prefix" & "Token"
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
