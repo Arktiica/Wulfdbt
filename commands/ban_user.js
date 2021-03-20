@@ -4,23 +4,23 @@ module.exports = {
     execute(message, client, args, prefix, errorColor) {
         const member = message.mentions.members.first(); // Mention User
         
-        /* For ease in making a bunch of error responses, 
-        this function is just called with the parameter.
-        It's just easier than making a bunch of variables. */
+        /* Error message for any invalid syntaxes when initiating the 
+        command. If you do not want the error to be auto-deleted, remove
+        or comment out everything in the ".then()" statement. */
         function msgError(msgContent) {     
             let ErrorEmbed = {
                 color: errorColor,
                 description: msgContent,
-            }
+            };
             message.channel.send({embed: ErrorEmbed}).then( msg => {
                 msg.delete({timeout: 5000})
             });
             return;
         };
-        
-        /* Function for a ban log. which will be sent in #logs if it exists.
-        If you want a "Ban" image for this embed, and replace IMAGE_LINK_HERE 
-        with that link Don't forget to uncomment. */
+
+        /* Ban log. which will be sent in #logs if it exists.
+        If you want a "Ban" image for this embed, then replace IMAGE_LINK_HERE 
+        with the desired image link. Don't forget to uncomment. */
         function BanLog(user, reas) { // BAN LOG 
             let eBanLog = {
                 color: "RED",
@@ -55,9 +55,10 @@ module.exports = {
                 timestamp: new Date(),
             }
 
-            /* Sends the embed in #{channelName}. If #logs does not exist,
-            an embed will not be sent. Feel freen to change out 'logs' with
-            any other desired channel name, but keep the type as 'text'. */
+            /* Sends the embed in #{channelName}. Default is set to #logs,
+            where if it doesn't exists, log will not be sent. Feel free to
+            replace 'logs' with any other desired channel name, but keep
+            the type as 'text'. */
             let channel = message.guild.channels.cache.array();
             let logsChannel = channel.filter(c => c.name === 'logs' && c.type === 'text')[0];
             if (!logsChannel) {
@@ -67,13 +68,13 @@ module.exports = {
             }
             
             return;
-        }
+        };
         
         /* Validates whether or not the person initiating the command 
         has permission to use the command before  actually doing anything. */
 
         if (message.member.hasPermission('BAN_MEMBERS' || 'ADMINISTRATOR') || message.author.id === message.guild.ownerID) {
-            if (args[0] === '-h') { // An embed for how to use the ban command.
+            if (args[0] === '-h') { // Embed for how to use the ban command. <prefix>kick -h
                 var eBanHelp = {
                     color: "WHITE",
                     title: "Ban Users - HELP",
@@ -94,7 +95,7 @@ module.exports = {
                     ],
                     timestamp: new Date(),
                     footer: {
-                        text: message.author.username + `(${message.author.id})`,
+                        text: message.author.username + ` (${message.author.id})`,
                         icon_url: message.author.displayAvatarURL({dynamic: true}),
                     }
                 }
@@ -121,37 +122,45 @@ module.exports = {
                 
                 /* If you want the bot to not delete the "{member} was banned from...", 
                 remove everything from "m =>" to "}," in the .then() statement. */
-
+                var errorMSG = ':x: Error: ban unsuccessful.'
                 message.channel.send(`${message.guild.member(member)} was banned from ${message.guild.name}.`).then( m => {
                     m.delete({timeout: 7500}); // Deletes "{member} was banned from..." after 7.5s
                 },
-                    member.ban({reason: APIReason}).catch(console.error())
+                    member.ban({reason: APIReason}).catch(
+                        console.error() && message.channel.send({embed: msgError(errorMSG)})
+                    )
                 );
                 BanLog(member, reason);                
                 return;
-            } else if (member === undefined) { // Ban via ID
+            } else if (!member) { // Ban via ID
                 var userID = args.shift();
+                var errorMSG = ":x: Error: unable to find and ban this user."
                 message.guild.members.fetch(userID).then(reqUser => {
 
                     /* This let and if/else just allows the reason to be put as 
                     the reason for the discord API, nothing special really. */
+                    
                     let reason = args.join(" ");
                     if (reason === "") {
-                        var APIReason = null
-                        reason = "No reason provided."
+                        var APIReason = null;
+                        reason = "No reason provided.";
                     } else {
-                        var APIReason = reason
+                        var APIReason = reason;
                     }
-                    reqUser.ban({reason: APIReason}).catch(console.error())
-                    BanLog(reqUser, reason);                
+                    var errorMSG = ':x: Error: ban unsuccessful.'
+                    reqUser.ban({reason: APIReason}).catch(
+                        console.error() && message.channel.send({embed: msgError(errorMSG)})
+                    );
+                    BanLog(reqUser, reason);
                     return;
-                })
+                }).catch(msgError(errorMSG)) // If the ID isn't valid.
             }
         } else { 
         /* If the user doesn't have the sufficient permissions to use this command, 
-        the following error message will be send via the msgError Function. */
-            var error_msg = ":x: Error: you do not have permission to do this.";
-            msgError(error_msg); // Calls function
+        the following error message will be sent. */
+            var errorMSG = ":x: Error: you do not have permission to do this.";
+            msgError(errorMSG);
+            return;
         }
     }
 }
