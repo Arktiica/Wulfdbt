@@ -1,6 +1,5 @@
 # Wulf - Discord Bot
-##### Written in Discord.js V12
-###### Open source discord bot.
+###### Open source discord bot written in Discord.js V12
 
 ### Current Commands
 * Help
