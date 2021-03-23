@@ -23,7 +23,7 @@ what is all here.
 
 Additional information for what you may need, how to get these,
 or documentation for discord.js & JavaScript can be found in the following:
-    * https://discord.com/developers
-    * https://discordjs.guide/#before-you-begin
-    * https://discord.js.org/#/
-    * https://developer.mozilla.org/en-US/docs/Web/JavaScript
+> https://discord.com/developers
+> https://discordjs.guide/#before-you-begin
+> https://discord.js.org/#/
+> https://developer.mozilla.org/en-US/docs/Web/JavaScript
