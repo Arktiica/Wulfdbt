@@ -2,9 +2,11 @@
 ###### Open source discord bot.
 
 ### Current Commands
+* Help
+* Kick User
+* Ban User
 * Guild Info
 * User Info
-* Banning Users
 
 ## Before You Get Started
 You'll need the token if you copy the entire code include
