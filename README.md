@@ -10,12 +10,13 @@
 You'll need the token if you copy the entire code include
 the index. To get the token you'll need to go to https://discord.com/developers
 and get the token for your bot. With this create a new file named: config.json and
-input the following code:
-
+input the following:
+```
 {
     "token": "TOKEN_ID_HERE",
     "prefix": "DESIRED_PREFIX"
 }
+```
 
 Note that the prefix will be "hard coded" and cannot be changed via discord with
 what is all here.
