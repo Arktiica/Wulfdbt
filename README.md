@@ -1,10 +1,12 @@
 # Wulf - Discord Bot
-###### Open source discord bot.
+###### Open source discord bot written in Discord.js V12
 
 ### Current Commands
+* Help
+* Kick User
+* Ban User
 * Guild Info
 * User Info
-* Banning Users
 
 ## Before You Get Started
 You'll need the token if you copy the entire code include
@@ -23,7 +25,7 @@ what is all here.
 
 Additional information for what you may need, how to get these,
 or documentation for discord.js & JavaScript can be found in the following:
-    https://discord.com/developers
-    https://discordjs.guide/#before-you-begin
-    https://discord.js.org/#/
-    https://developer.mozilla.org/en-US/docs/Web/JavaScript
+> [Discord Developers](https://discord.com/developers) </br>
+> [Discord.js Guide](https://discordjs.guide/#before-you-begin) </br>
+> [Discord.js Library](https://discord.js.org/#/) </br>
+> [Javascript Library](https://developer.mozilla.org/en-US/docs/Web/JavaScript) </br>
