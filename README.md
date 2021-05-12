@@ -7,6 +7,7 @@
 * Ban User
 * Guild Info
 * User Info
+* Echo Message
 
 ## Before You Get Started
 You'll need the token if you copy the entire code include
